@@ -1,0 +1,30 @@
+{
+  "name": "gws",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "js:watch": "webpack -w",
+    "css": "postcss --no-map -u postcss-import -u postcss-nested -u postcss-sorting -u autoprefixer -o dist/index.css src/css/index.css",
+    "css:watch": "npm run css -- -w",
+    "static": "rsync -av src/static/ dist/",
+    "start": "cpx './src/static/**/*' ./dist -w& npm run js:watch& npm run css:watch& http-server -c-1 dist",
+    "clean": "rm -rf ./dist/*",
+    "build": "npm run clean; npm run static; webpack --optimize-minimize --devtool none -p; npm run css -- -u cssnano"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^8.1.0",
+    "cpx": "^1.5.0",
+    "cssnano": "^3.10.0",
+    "http-server": "^0.11.1",
+    "postcss-cli": "^5.0.0",
+    "postcss-import": "^11.1.0",
+    "postcss-nested": "^3.0.0",
+    "postcss-sorting": "^3.1.0",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.12"
+  }
+}
